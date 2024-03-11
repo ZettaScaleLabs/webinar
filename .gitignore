@@ -21,3 +21,6 @@ cmake*
 *.a
 *.dlyb
 *.so
+
+.DS_store
+*.lock
