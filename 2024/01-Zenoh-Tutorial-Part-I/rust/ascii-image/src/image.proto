@@ -1,0 +1,8 @@
+package demo;
+
+message Image {
+  required string format = 1;
+  required int32 width = 2;
+  required int32 height = 3;
+  required bytes img = 4;
+}

@@ -1,0 +1,29 @@
+[package]
+name = "ascii-image-converter"
+version = "0.1.0"
+edition = "2021"
+authors = ["Angelo Corsaro"]
+license = "Apache-2.0"
+
+[[bin]]
+name = "ascii_image_pub"
+path = "src/ascii_image_pub.rs"
+
+[[bin]]
+name = "ascii_image_queryable"
+path = "src/ascii_image_queryable.rs"
+
+[[bin]]
+name = "ascii_image_query"
+path = "src/ascii_image_query.rs"
+
+
+[dependencies]
+zenoh = "0.10.1-rc"
+async-std = "1.12.0"
+asciify = "0.1.6"
+prost = "0.12.3"
+prost-types = "0.12.3"
+
+[build-dependencies]
+prost-build = "0.12.3"
