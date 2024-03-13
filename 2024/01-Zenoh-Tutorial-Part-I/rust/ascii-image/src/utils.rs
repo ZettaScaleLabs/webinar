@@ -54,6 +54,8 @@ impl From<String> for proto::Image {
     }
 }
 
+
+
 pub fn img_to_bytes(img: &proto::Image) -> Vec<u8> {
     let mut buf = Vec::<u8>::with_capacity(img.encoded_len());
     img.encode(&mut buf).unwrap();

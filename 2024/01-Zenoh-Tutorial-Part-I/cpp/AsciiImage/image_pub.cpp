@@ -10,6 +10,7 @@ int main() {
     zenoh::Config c;
     auto z = zenoh::expect<zenoh::Session>(
             zenoh::open(std::move(c)));
+    auto p = zenoh::expect(z.declare_publisher("demo/bulletin/ascii-image"));
     Image lbd;
     lbd.set_width(80);
     lbd.set_height(34);
@@ -37,12 +38,22 @@ int main() {
         std::cout << " (0) -- Exit" << std::endl;
         std::cin >> s;
 
+        auto p_opts = zenoh::PutOptions();
+        p_opts
+            .set_encoding(zenoh::EncodingPrefix::Z_ENCODING_PREFIX_APP_CUSTOM)
+            .set_congestion_control(zenoh::CongestionControl ::Z_CONGESTION_CONTROL_DROP)
+            .set_priority(zenoh::Priority::Z_PRIORITY_INTERACTIVE_HIGH);
+
+
         switch (s) {
             case 1:
-                z.put("demo/bulletin/ascii-image", slbd);
+                // Just to showcase producing data w/o a publisher
+
+                z.put("demo/bulletin/ascii-image", slbd, p_opts);
                 break;
             case 2:
-                z.put("demo/bulletin/ascii-image", sbd);
+                // Just to showcase publishing with a publisher
+                p.put(sbd);
                 break;
             default:
                 break;

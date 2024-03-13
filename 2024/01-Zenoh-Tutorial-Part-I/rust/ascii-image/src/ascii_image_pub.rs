@@ -3,7 +3,6 @@ pub mod utils;
 use std::env::args;
 use zenoh::prelude::r#async::*;
 
-
 #[async_std::main]
 async fn main() {
     let args: Vec<String> = args().collect();
@@ -16,6 +15,5 @@ async fn main() {
 
     let c = Config::default();
     let z = zenoh::open(c).res().await.unwrap();
-
     let _ = z.put("demo/bulletin/ascii-image", utils::img_to_bytes(&img)).res().await;
 }
