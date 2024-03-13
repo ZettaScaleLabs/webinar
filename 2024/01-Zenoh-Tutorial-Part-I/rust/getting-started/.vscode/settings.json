@@ -1,0 +1,10 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./Cargo.toml"
+    ],
+    "cSpell.words": [
+        "opencv",
+        "videoio",
+        "zpub"
+    ]
+}
