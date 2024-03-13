@@ -4,6 +4,9 @@ use std::env::args;
 use zenoh::prelude::r#async::*;
 use async_std::io;
 
+fn create_path(base: &str, name: &str) -> String {
+    format!("{}/{}", base, name)
+}
 #[async_std::main]
 async fn main() {
     let args: Vec<String> = args().collect();
@@ -11,6 +14,7 @@ async fn main() {
         println!("Usage:\n\tascii_image_queryable <images-directory>");
         return;
     }
+    let base = String::from(&args[1]);
     let z = zenoh::open(zenoh::config::default()).res().await.unwrap();
     let queryable =
         z.declare_queryable("demo/transcoder/image2ascii").res().await.unwrap();
@@ -19,10 +23,10 @@ async fn main() {
 
         let r = match q.value() {
             Some(v) => {
-                // let img_name: String = (v.payload.clone()).into();
                 let img_name: String = String::from_utf8(v.payload.contiguous().to_vec()).unwrap();
-                let str_image = utils::img2ascii(&img_name);
-                println!("Converted Image:\n{}", &str_image);
+                let img_path = create_path(&base, &img_name);
+                println!("Fetching image at: {}", &img_path);
+                let str_image = utils::img2ascii(&img_path);
                 let img  = utils::proto::Image::from(str_image);
                 Ok(Sample::new(q.key_expr().clone(), utils::img_to_bytes(&img)))
             }

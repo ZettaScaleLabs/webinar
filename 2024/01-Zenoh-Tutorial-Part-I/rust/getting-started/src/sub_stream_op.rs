@@ -9,7 +9,6 @@ async fn main() -> zenoh::Result<()> {
     
     let stream = sub.stream();
     let mut kvs = stream.map(|s: Sample| { (s.key_expr, s.value.payload) });
-
     while let Some((k, v)) = kvs.next().await {
         println!("key: {}, value: {:?}", k, v);
     }

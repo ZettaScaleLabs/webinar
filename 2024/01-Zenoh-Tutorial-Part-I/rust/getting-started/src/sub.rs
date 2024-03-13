@@ -9,7 +9,6 @@ async fn main() {
         .await
         .unwrap();
     println!("Waiting for data...");
-    // let rstream = sub.recv_async().fuse().map(|rs| { if let Ok(s) = rs { Some((s.key_expr, s.value)) } else { None }});
 
     while let Ok(s) = sub.recv_async().await {
         println!(

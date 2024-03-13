@@ -10,7 +10,7 @@ int main() {
     zenoh::Config c;
     auto z = zenoh::expect<zenoh::Session>(
             zenoh::open(std::move(c)));
-    auto p = zenoh::expect(z.declare_publisher("demo/bulletin/ascii-image"));
+    auto p = zenoh::expect(z.declare_publisher("demo/bulletin/ascii-image/zenoh-logo-dark"));
     Image lbd;
     lbd.set_width(80);
     lbd.set_height(34);
@@ -49,7 +49,7 @@ int main() {
             case 1:
                 // Just to showcase producing data w/o a publisher
 
-                z.put("demo/bulletin/ascii-image", slbd, p_opts);
+                z.put("demo/bulletin/ascii-image/zenoh-logo-light", slbd, p_opts);
                 break;
             case 2:
                 // Just to showcase publishing with a publisher

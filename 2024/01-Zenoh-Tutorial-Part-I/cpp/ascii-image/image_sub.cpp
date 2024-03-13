@@ -23,7 +23,7 @@ int main() {
     auto z = zenoh::expect<zenoh::Session>(
             zenoh::open(std::move(c)));
     auto s = zenoh::expect<zenoh::Subscriber>(
-            z.declare_subscriber("demo/bulletin/ascii-image", render_image));
+            z.declare_subscriber("demo/bulletin/ascii-image/*", render_image));
 
     std::cout << "Press Enter to exit." << std::endl;
     std::cin.get();
