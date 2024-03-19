@@ -1,0 +1,22 @@
+[package]
+name = "attchment"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "a_pub"
+path = "./src/a_pub.rs"
+
+[[bin]]
+name = "a_pub_nocs"
+path = "./src/a_pub_nocs.rs"
+
+[[bin]]
+name = "a_sub"
+path = "./src/a_sub.rs"
+
+[dependencies]
+async-std = { version = "1.12.0", features = ["attributes"] }
+zenoh = { version = "0.10.1-rc", features = ["unstable"]}
+crc = "3.0.1"
