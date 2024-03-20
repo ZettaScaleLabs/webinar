@@ -22,5 +22,4 @@ async fn main() {
             .res().await;
         async_std::task::sleep(Duration::from_secs(1)).await;
     }
-
 }
