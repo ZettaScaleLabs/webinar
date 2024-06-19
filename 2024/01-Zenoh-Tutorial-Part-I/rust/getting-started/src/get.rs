@@ -1,14 +1,14 @@
-use zenoh::prelude::r#async::*;
+use zenoh::prelude::*;
 
-#[async_std::main]
+#[tokio::main]
 async fn main() {
-    let z = zenoh::open(config::default()).res().await.unwrap();
+    let z = zenoh::open(config::default()).await.unwrap();
     let k = "zetta/webinar/zenoh/*";
     
     let results = z.get(k)
         .target(QueryTarget::BestMatching)
         .consolidation(ConsolidationMode::None)
-        .res().await.unwrap();
+        .await.unwrap();
     
     while let Ok(reply) = results.recv_async().await {
         match reply.sample {

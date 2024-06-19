@@ -2,10 +2,10 @@ use zenoh::prelude::r#async::*;
 
 #[async_std::main]
 async fn main() {
-    let z = zenoh::open(zenoh::config::default()).res().await.unwrap();
+    let z = zenoh::open(zenoh::config::default()).await.unwrap();
     let sub = z
         .declare_subscriber("zetta/webinar/**")
-        .res()
+
         .await
         .unwrap();
     println!("Waiting for data...");

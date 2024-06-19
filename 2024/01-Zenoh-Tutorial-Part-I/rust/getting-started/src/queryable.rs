@@ -9,14 +9,14 @@ fn get_qid() -> String {
 #[async_std::main]
 async fn main() {
     let qid =  get_qid();   
-    let z = zenoh::open(config::default()).res().await.unwrap();
+    let z = zenoh::open(config::default()).await.unwrap();
     let queryable = 
         z.declare_queryable("zetta/webinar/zenoh/**")
         .complete(false)
-        .res().await.unwrap();
+        .await.unwrap();
 
     while let Ok(query) = queryable.recv_async().await {
         println!("Received Query: {}", query);
-        let _ = query.reply(Ok(Sample::new(query.key_expr().clone(), qid.clone()))).res().await;        
+        let _ = query.reply(Ok(Sample::new(query.key_expr().clone(), qid.clone()))).await;
     }
 }

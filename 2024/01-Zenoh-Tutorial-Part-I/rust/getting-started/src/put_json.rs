@@ -2,7 +2,7 @@ use zenoh::prelude::r#async::*;
 
 #[async_std::main]
 async fn main() {
-    let z = zenoh::open(config::default()).res().await.unwrap();
+    let z = zenoh::open(config::default()).await.unwrap();
     let webinar = r#"
     {
         "title": "Understanding Zenoh",
@@ -20,6 +20,6 @@ async fn main() {
     let _ = z
         .put("zetta/webinar/zenoh/unleashed", webinar)
         .encoding(KnownEncoding::AppJson)
-        .res()
+
         .await;
 }
